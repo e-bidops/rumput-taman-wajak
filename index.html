@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Griya Rumput Taman | Suplier Rumput Alami Segar & Jasa Pasang Profesional</title>
+  <meta name="description" content="Pusat suplier rumput taman segar langsung dari petani: Rumput Gajah Mini, Rumput Jepang, Rumput Golf, dan Swiss. Layanan pasang profesional & bergaransi.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Admin Floating Bar (Appears when logged in) -->
+  <aside id="adminToolbar" class="admin-toolbar hidden">
+    <div class="admin-toolbar-inner">
+      <div class="admin-status">
+        <span class="admin-pulse-dot"></span>
+        <span class="admin-badge">Admin CMS</span>
+      </div>
+      <div class="admin-actions">
+        <button id="btnToggleLiveEdit" class="admin-btn active" title="Aktifkan klik teks untuk edit langsung">
+          <span class="icon">✏️</span>
+          <span class="btn-text">Edit Teks Langsung</span>
+        </button>
+        <button id="btnOpenPriceModal" class="admin-btn" title="Ubah harga rumput & ongkos jasa">
+          <span class="icon">💰</span>
+          <span class="btn-text">Kelola Harga & Kontak</span>
+        </button>
+        <button id="btnSaveCms" class="admin-btn primary" title="Simpan semua perubahan">
+          <span class="icon">💾</span>
+          <span class="btn-text">Simpan</span>
+        </button>
+        <button id="btnResetCms" class="admin-btn danger" title="Kembalikan semua teks & harga ke bawaan asli">
+          <span class="icon">🔄</span>
+          <span class="btn-text">Reset</span>
+        </button>
+        <button id="btnExportHtml" class="admin-btn info" title="Unduh file HTML dengan perubahan terkini">
+          <span class="icon">📥</span>
+          <span class="btn-text">Ekspor HTML</span>
+        </button>
+        <button id="btnLogoutAdmin" class="admin-btn" title="Keluar dari mode admin">
+          <span class="icon">🚪</span>
+          <span class="btn-text">Keluar</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Header / Navigation -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="brand-logo">
+        <div class="logo-badge">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-title" data-cms="brand_name">Griya<span class="text-accent">Rumput</span></span>
+          <span class="brand-tagline" data-cms="brand_tagline">Lawn & Landscape Studio</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#katalog" class="nav-link">Katalog Rumput</a>
+        <a href="#kalkulator" class="nav-link">Kalkulator Biaya</a>
+        <a href="#layanan" class="nav-link">Layanan</a>
+        <a href="#keunggulan" class="nav-link">Keunggulan</a>
+        <a href="#panduan" class="nav-link">Tips Perawatan</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Dark / Light Mode Toggle Button -->
+        <button id="themeToggleBtn" class="theme-toggle-btn" aria-label="Ganti mode terang/gelap" title="Ganti mode terang / gelap">
+          <div class="theme-icon-wrap">
+            <svg class="sun-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"/>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+            </svg>
+          </div>
+          <span class="theme-label" id="themeLabel">Mode Gelap</span>
+        </button>
+
+
+        <a href="https://wa.me/6281234567890?text=Halo%20GriyaRumput,%20saya%20ingin%20konsultasi%20pemesanan%20rumput%20taman" target="_blank" rel="noopener" class="btn btn-whatsapp-nav wa-dynamic-link">
+          <svg class="wa-icon" viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+          </svg>
+          <span>Chat WA</span>
+          <span class="live-dot" title="Online"></span>
+        </a>
+        <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-glow-sphere"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text" data-cms="hero_badge">Panen Petani Langsung • Segar Hari Kirim • Garansi 14 Hari</span>
+      </div>
+      <h1 class="hero-title" data-cms="hero_title">
+        Hadirkan Nuansa Alam Eksklusif dengan <span class="gradient-text">Rumput Taman Premium</span>
+      </h1>
+      <p class="hero-subtitle" data-cms="hero_subtitle">
+        Penyedia lempengan rumput hidup terstandarisasi untuk hunian modern, villa arsitektural, perkantoran, dan lapangan. Dikerjakan oleh spesialis landscape dengan jaminan tumbuh subur.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#kalkulator" class="btn btn-primary btn-lg">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2">
+            <path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1-2-1z"/>
+            <path d="M8 7h8M8 11h8M8 15h5"/>
+          </svg>
+          <span data-cms="hero_btn_calc">Simulasi Biaya & Kebutuhan</span>
+        </a>
+        <a href="https://wa.me/6281234567890?text=Halo%20GriyaRumput,%20saya%20ingin%20konsultasi%20taman" target="_blank" rel="noopener" class="btn btn-glass btn-lg wa-dynamic-link">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+          </svg>
+          <span data-cms="hero_btn_consult">Konsultasi & Survey Gratis</span>
+        </a>
+      </div>
+
+      <!-- Bento-style Trust Metric Cards -->
+      <div class="bento-metrics">
+        <div class="bento-metric-card">
+          <div class="bento-icon">📐</div>
+          <div class="bento-data">
+            <span class="bento-number" data-cms="metric_area">25.000+</span>
+            <span class="bento-unit">m²</span>
+          </div>
+          <span class="bento-desc" data-cms="metric_area_desc">Rumput Sukses Ditanam</span>
+        </div>
+
+        <div class="bento-metric-card">
+          <div class="bento-icon">🏡</div>
+          <div class="bento-data">
+            <span class="bento-number" data-cms="metric_client">980+</span>
+            <span class="bento-unit">Klien</span>
+          </div>
+          <span class="bento-desc" data-cms="metric_client_desc">Hunian, Villa & Properti</span>
+        </div>
+
+        <div class="bento-metric-card">
+          <div class="bento-icon">🛡️</div>
+          <div class="bento-data">
+            <span class="bento-number" data-cms="metric_guarantee">14 Hari</span>
+          </div>
+          <span class="bento-desc" data-cms="metric_guarantee_desc">Garansi Sulam & Hidup</span>
+        </div>
+
+        <div class="bento-metric-card highlight">
+          <div class="bento-icon">⭐</div>
+          <div class="bento-data">
+            <span class="bento-number" data-cms="metric_rating">4.9</span>
+            <span class="bento-unit">/ 5.0</span>
+          </div>
+          <span class="bento-desc" data-cms="metric_rating_desc">Rating Kepuasan Konsumen</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Grass Calculator Section -->
+  <section class="calculator-section" id="kalkulator">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag" data-cms="calc_tag">SIMULATOR ESTIMASI AKURAT</span>
+        <h2 class="section-title" data-cms="calc_title">Kalkulator Kebutuhan & Biaya Rumput</h2>
+        <p class="section-desc" data-cms="calc_desc">Hitung kebutuhan jumlah lempeng rumput, media tanah subur, dan jasa tanam secara transparan dalam hitungan detik.</p>
+      </div>
+
+      <div class="calc-card-wrapper">
+        <div class="calc-form-panel">
+          <!-- Step 1 -->
+          <div class="calc-step-header">
+            <span class="step-badge">Langkah 1</span>
+            <label class="form-label mb-0" for="grassTypeSelect">Pilih Varietas Rumput</label>
+          </div>
+          <div class="form-group">
+            <select id="grassTypeSelect" class="form-control select-modern">
+              <option value="gajah_mini" data-price="25000" selected>Rumput Gajah Mini — Rp 25.000 / m² (Terlaris)</option>
+              <option value="jepang" data-price="35000">Rumput Jepang / Peking — Rp 35.000 / m² (Bilah Halus Rapat)</option>
+              <option value="golf" data-price="45000">Rumput Golf / Bermuda — Rp 45.000 / m² (Super Halus Mewah)</option>
+              <option value="swiss" data-price="40000">Rumput Swiss Super — Rp 40.000 / m² (Hijau Cerah Lembut)</option>
+              <option value="manila" data-price="32000">Rumput Manila — Rp 32.000 / m² (Tahan Injakan)</option>
+            </select>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="calc-step-header">
+            <span class="step-badge">Langkah 2</span>
+            <label class="form-label mb-0">Tentukan Luas Area Taman</label>
+          </div>
+          <div class="form-group">
+            <div class="tab-buttons">
+              <button type="button" class="tab-btn active" id="btnModeArea">Luas Langsung (m²)</button>
+              <button type="button" class="tab-btn" id="btnModeDimension">Panjang × Lebar (m)</button>
+            </div>
+          </div>
+
+          <!-- Input Mode: Luas Langsung with Slider -->
+          <div class="input-mode-group" id="groupArea">
+            <div class="form-group">
+              <div class="slider-header">
+                <span class="slider-label">Geser atau ketik luas:</span>
+                <span class="slider-val-badge" id="sliderValDisplay">30 m²</span>
+              </div>
+              <input type="range" id="rangeAreaSlider" min="5" max="300" step="5" value="30" class="modern-range">
+              <div class="input-with-suffix mt-2">
+                <input type="number" id="inputArea" class="form-control" value="30" min="1" step="1">
+                <span class="input-suffix">m²</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Mode: Panjang x Lebar -->
+          <div class="input-mode-group hidden" id="groupDimension">
+            <div class="grid-2-col">
+              <div class="form-group">
+                <label class="form-sublabel" for="inputLength">Panjang</label>
+                <div class="input-with-suffix">
+                  <input type="number" id="inputLength" class="form-control" value="6" min="0.5" step="0.5">
+                  <span class="input-suffix">meter</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="form-sublabel" for="inputWidth">Lebar</label>
+                <div class="input-with-suffix">
+                  <input type="number" id="inputWidth" class="form-control" value="5" min="0.5" step="0.5">
+                  <span class="input-suffix">meter</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3: Addons -->
+          <div class="calc-step-header">
+            <span class="step-badge">Langkah 3</span>
+            <label class="form-label mb-0">Pilihan Layanan Tambahan</label>
+          </div>
+          <div class="form-group">
+            <div class="addon-options">
+              <label class="checkbox-card">
+                <input type="checkbox" id="checkInstallation" checked>
+                <div class="checkbox-info">
+                  <div class="checkbox-title">
+                    <span data-cms="addon_install_title">Jasa Pasang & Gelar Profesional</span>
+                    <span class="badge-price" id="addonInstallRateDisplay">+Rp 15.000/m²</span>
+                  </div>
+                  <div class="checkbox-desc" data-cms="addon_install_desc">Pembersihan gulma liar, penataan presisi tanpa sela kosong, dan pemadatan rol.</div>
+                </div>
+              </label>
+
+              <label class="checkbox-card">
+                <input type="checkbox" id="checkFertilizer" checked>
+                <div class="checkbox-info">
+                  <div class="checkbox-title">
+                    <span data-cms="addon_fert_title">Media Tanah Subur & Pupuk Awal</span>
+                    <span class="badge-price" id="addonFertRateDisplay">+Rp 10.000/m²</span>
+                  </div>
+                  <div class="checkbox-desc" data-cms="addon_fert_desc">Tanah merah gembur murni + nutrisi organik agar akar mengikat tanah dalam 3 hari.</div>
+                </div>
+              </label>
+
+              <label class="checkbox-card">
+                <input type="checkbox" id="checkExtraSpare" checked>
+                <div class="checkbox-info">
+                  <div class="checkbox-title">
+                    <span data-cms="addon_spare_title">Cadangan Sudut & Lekukan (+5% Material)</span>
+                    <span class="badge-recommended">Direkomendasikan</span>
+                  </div>
+                  <div class="checkbox-desc" data-cms="addon_spare_desc">Kompensasi potongan lekuk kontur taman agar rumput tidak kurang saat dipasang.</div>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Summary Card -->
+        <div class="calc-result-panel">
+          <div class="result-header">
+            <div class="live-status-pill">
+              <span class="pulse-indicator"></span>
+              <span>Kalkulasi Otomatis</span>
+            </div>
+            <h3 class="result-title">Estimasi Total Proyek</h3>
+            <p class="result-subtitle">Harga terstandar tangan pertama petani tanpa perantara calo.</p>
+          </div>
+
+          <div class="result-breakdown">
+            <div class="breakdown-row">
+              <span class="row-label">Luas Area Efektif</span>
+              <span class="row-value font-bold" id="resArea">30 m²</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">Kebutuhan Lempeng Rumput (+ Cadangan)</span>
+              <span class="row-value font-bold text-accent" id="resTotalGrass">31.5 m² (± 32 Lempeng)</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">Biaya Rumput (<span id="resGrassName">Gajah Mini</span>)</span>
+              <span class="row-value" id="resGrassPrice">Rp 787.500</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">Jasa Pasang & Tanam</span>
+              <span class="row-value" id="resInstallPrice">Rp 450.000</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="row-label">Media Tanah Merah & Pupuk</span>
+              <span class="row-value" id="resFertilizerPrice">Rp 300.000</span>
+            </div>
+            <div class="breakdown-divider"></div>
+            <div class="breakdown-total">
+              <div class="total-label">Estimasi Total Investasi:</div>
+              <div class="total-value" id="resTotalPrice">Rp 1.537.500</div>
+              <div class="total-note">*Estimasi dapat disesuaikan dengan kondisi kontur lahan & lokasi pengiriman.</div>
+            </div>
+          </div>
+
+          <div class="result-action">
+            <button type="button" id="btnOrderWhatsApp" class="btn btn-whatsapp-full">
+              <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+              </svg>
+              <span>Kirim Rincian ke WhatsApp Konsultan</span>
+            </button>
+            <div class="result-guarantee">
+              <span>🛡️ Jaminan Garansi Hidup & Tumbuh 14 Hari</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Catalog Section -->
+  <section class="catalog-section" id="katalog">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag" data-cms="catalog_tag">KOLEKSI VARIETAS PILIHAN</span>
+        <h2 class="section-title" data-cms="catalog_title">Katalog Jenis Rumput Taman</h2>
+        <p class="section-desc" data-cms="catalog_desc">Pilihan bibit hidup berkualitas dengan karakteristik spesifik yang sesuai dengan intensitas cahaya dan gaya arsitektur rumah Anda.</p>
+        
+        <!-- Filter Tabs -->
+        <div class="catalog-filter-bar">
+          <button class="filter-chip active" data-filter="all">Semua Jenis</button>
+          <button class="filter-chip" data-filter="favorite">Paling Laris</button>
+          <button class="filter-chip" data-filter="premium">Mewah / Halus</button>
+          <button class="filter-chip" data-filter="low-maintenance">Minim Perawatan</button>
+        </div>
+      </div>
+
+      <div class="catalog-grid">
+        <!-- Card 1: Rumput Gajah Mini -->
+        <article class="grass-card featured" data-category="favorite low-maintenance" id="card_gajah_mini">
+          <div class="card-badge">Paling Populer</div>
+          <div class="card-img-box">
+            <img src="assets/rumput_gajah_mini.jpg" alt="Rumput Gajah Mini Asli" loading="lazy" class="card-img">
+            <div class="card-img-overlay">
+              <span class="view-chip">Karakter Daun Lebar Pipih</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-price-tag">
+              <span class="price-from">Mulai dari</span>
+              <span class="price-amount" id="display_price_gajah_mini">Rp 25.000</span>
+              <span class="price-unit">/ m²</span>
+            </div>
+            <h3 class="card-title" data-cms="grass_title_gajah_mini">Rumput Gajah Mini</h3>
+            <p class="card-desc" data-cms="grass_desc_gajah_mini">Varietas terfavorit keluarga Indonesia. Daun oval melebar di permukaan tanah, tahan naungan ringan, dan jarang membutuhkan pemotongan rumput.</p>
+            
+            <div class="card-specs">
+              <div class="spec-item">
+                <span class="spec-label">Sinar Matahari</span>
+                <span class="spec-value" data-cms="grass_sun_gajah_mini">Matahari Penuh / Sedang</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Frekuensi Potong</span>
+                <span class="spec-value" data-cms="grass_cut_gajah_mini">1 - 2 Bulan Sekali</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Karakter Daun</span>
+                <span class="spec-value" data-cms="grass_leaf_gajah_mini">Oval tebal, melebar di tanah</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Tingkat Perawatan</span>
+                <span class="spec-value text-accent font-bold" data-cms="grass_care_gajah_mini">Sangat Mudah</span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn btn-outline-primary select-grass-btn" data-value="gajah_mini">Pilih di Kalkulator</button>
+              <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Rumput%20Gajah%20Mini" target="_blank" rel="noopener" class="btn btn-icon-wa wa-dynamic-link" title="Pesan Rumput Gajah Mini">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2: Rumput Jepang / Peking -->
+        <article class="grass-card" data-category="favorite premium" id="card_jepang">
+          <div class="card-badge premium">Estetika Mewah</div>
+          <div class="card-img-box">
+            <img src="assets/rumput_jepang.jpg" alt="Rumput Jepang Peking Asli" loading="lazy" class="card-img">
+            <div class="card-img-overlay">
+              <span class="view-chip">Karakter Jarum Runcing Rapat</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-price-tag">
+              <span class="price-from">Mulai dari</span>
+              <span class="price-amount" id="display_price_jepang">Rp 35.000</span>
+              <span class="price-unit">/ m²</span>
+            </div>
+            <h3 class="card-title" data-cms="grass_title_jepang">Rumput Jepang (Peking)</h3>
+            <p class="card-desc" data-cms="grass_desc_jepang">Bilah daun runcing halus tumbuh tegak dan padat laksana karpet permadani hijau. Tampilan sangat rapi dan eksklusif untuk halaman fasad rumah modern.</p>
+            
+            <div class="card-specs">
+              <div class="spec-item">
+                <span class="spec-label">Sinar Matahari</span>
+                <span class="spec-value" data-cms="grass_sun_jepang">Wajib Full Sun (6-8 jam)</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Frekuensi Potong</span>
+                <span class="spec-value" data-cms="grass_cut_jepang">3 - 4 Minggu Sekali</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Karakter Daun</span>
+                <span class="spec-value" data-cms="grass_leaf_jepang">Jarum halus, padat & tegak</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Tingkat Perawatan</span>
+                <span class="spec-value text-accent font-bold" data-cms="grass_care_jepang">Sedang - Pemangkasan Teratur</span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn btn-outline-primary select-grass-btn" data-value="jepang">Pilih di Kalkulator</button>
+              <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Rumput%20Jepang" target="_blank" rel="noopener" class="btn btn-icon-wa wa-dynamic-link" title="Pesan Rumput Jepang">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3: Rumput Golf / Bermuda -->
+        <article class="grass-card" data-category="premium" id="card_golf">
+          <div class="card-badge golf">Super Halus Presisi</div>
+          <div class="card-img-box">
+            <img src="assets/hero_lawn.jpg" alt="Rumput Golf Bermuda Asli" loading="lazy" class="card-img">
+            <div class="card-img-overlay">
+              <span class="view-chip">Karakter Lembut Lapangan Hijau</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-price-tag">
+              <span class="price-from">Mulai dari</span>
+              <span class="price-amount" id="display_price_golf">Rp 45.000</span>
+              <span class="price-unit">/ m²</span>
+            </div>
+            <h3 class="card-title" data-cms="grass_title_golf">Rumput Golf (Bermuda)</h3>
+            <p class="card-desc" data-cms="grass_desc_golf">Sangat lembut saat diinjak tanpa alas kaki. Sangat cocok untuk halaman utama villa, area santai kolam renang, atau lapangan olahraga pribadi.</p>
+            
+            <div class="card-specs">
+              <div class="spec-item">
+                <span class="spec-label">Sinar Matahari</span>
+                <span class="spec-value" data-cms="grass_sun_golf">Matahari Penuh Terbuka</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Frekuensi Potong</span>
+                <span class="spec-value" data-cms="grass_cut_golf">2 Minggu Sekali</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Karakter Daun</span>
+                <span class="spec-value" data-cms="grass_leaf_golf">Mikro sangat halus & lentur</span>
+              </div>
+              <div class="spec-item">
+                <span class="spec-label">Tingkat Perawatan</span>
+                <span class="spec-value text-accent font-bold" data-cms="grass_care_golf">Intensif / Butuh Pemangkas</span>
+              </div>
+            </div>
+
+            <div class="card-footer">
+              <button class="btn btn-outline-primary select-grass-btn" data-value="golf">Pilih di Kalkulator</button>
+              <a href="https://wa.me/6281234567890?text=Halo,%20saya%20tertarik%20dengan%20Rumput%20Golf%20Bermuda" target="_blank" rel="noopener" class="btn btn-icon-wa wa-dynamic-link" title="Pesan Rumput Golf">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                  <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Bento Grid -->
+  <section class="services-section" id="layanan">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag" data-cms="services_tag">LAYANAN LENGKAP END-TO-END</span>
+        <h2 class="section-title" data-cms="services_title">Solusi Terpadu Lanskap Halaman</h2>
+        <p class="section-desc" data-cms="services_desc">Mulai dari penyediaan bibit segar hingga perawatan rutin, kami hadirkan pelayanan profesional berstandar tinggi.</p>
+      </div>
+
+      <div class="services-bento-grid">
+        <div class="service-bento-card span-2">
+          <div class="bento-badge">Layanan Utama</div>
+          <div class="service-icon-wrap">🌱</div>
+          <h3 class="service-title" data-cms="service_1_title">Suplier Rumput Lempengan Segar (Eceran & Proyek Skala Besar)</h3>
+          <p class="service-desc" data-cms="service_1_desc">Pengiriman rumput lempengan segar dipanen langsung pada hari keberangkatan armada. Kami melayani mulai dari 5 m² untuk taman mini hingga ribuan meter persegi untuk developer perumahan dan kontraktor.</p>
+          <div class="service-tags">
+            <span>Direct Farmer</span>
+            <span>Segar 100%</span>
+            <span>Jabodetabek & Antar Kota</span>
+          </div>
+        </div>
+
+        <div class="service-bento-card">
+          <div class="service-icon-wrap">🚜</div>
+          <h3 class="service-title" data-cms="service_2_title">Jasa Pengolahan Lahan & Tanam</h3>
+          <p class="service-desc" data-cms="service_2_desc">Perataan kontur tanah, pembersihan puing/gulma, pemberian lapisan tanah subur, penyusunan lempeng rumput tanpa celah, dan pemadatan rol perakaran.</p>
+        </div>
+
+        <div class="service-bento-card">
+          <div class="service-icon-wrap">🏡</div>
+          <h3 class="service-title" data-cms="service_3_title">Desain Taman & Hardscape</h3>
+          <p class="service-desc" data-cms="service_3_desc">Penataan batu pijakan (stepping stone andesit), tanaman border penghias sudut, lampu sorot taman, dan sistem drainase anti-genangan.</p>
+        </div>
+
+        <div class="service-bento-card span-2">
+          <div class="bento-badge">After-Sales</div>
+          <div class="service-icon-wrap">🛡️</div>
+          <h3 class="service-title" data-cms="service_4_title">Garansi Sulam 14 Hari & Pemupukan Awal Gratis</h3>
+          <p class="service-desc" data-cms="service_4_desc">Komitmen mutu nyata. Bila ada bagian rumput yang menguning atau gagal tumbuh dalam masa adaptasi 14 hari, tim kami akan datang mengganti bibit baru tanpa biaya tambahan sepeser pun.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="why-us-section" id="keunggulan">
+    <div class="section-container">
+      <div class="why-us-content">
+        <div class="why-us-text">
+          <span class="section-tag" data-cms="why_tag">MENGAPA KAMI LEBIH UNGGUL</span>
+          <h2 class="section-title" data-cms="why_title">Kualitas Terjamin Langsung Tangan Pertama dari Petani</h2>
+          <p class="section-desc" data-cms="why_desc">Rumput adalah investasi jangka panjang keindahan rumah Anda. Kami menjamin bibit segar tanpa layu di gudang dengan pengerjaan tukang taman berdedikasi.</p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <div class="feature-icon">🌿</div>
+              <div>
+                <h4 class="feature-heading" data-cms="feature_1_title">Panen Segar di Hari yang Sama</h4>
+                <p class="feature-text" data-cms="feature_1_desc">Rumput baru dipotong dan dicabut dari kebun pada hari pengiriman, memastikan perakaran tetap hidup dan tidak kering dalam proses kirim.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">🛡️</div>
+              <div>
+                <h4 class="feature-heading" data-cms="feature_2_title">Garansi Resmi 14 Hari</h4>
+                <p class="feature-text" data-cms="feature_2_desc">Jika terdapat rumput yang mati atau gagal adaptasi dalam kurun 14 hari pasca tanam, kami ganti baru tanpa perdebatan berbelit.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">🚚</div>
+              <div>
+                <h4 class="feature-heading" data-cms="feature_3_title">Armada Truk & Pickup Mandiri</h4>
+                <p class="feature-text" data-cms="feature_3_desc">Pengiriman tepat waktu dengan jadwal terjaga dan penanganan khusus agar lempengan rumput tidak rusak saat diturunkan.</p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <div class="feature-icon">🤝</div>
+              <div>
+                <h4 class="feature-heading" data-cms="feature_4_title">Gratis Survey Lokasi & Konsultasi</h4>
+                <p class="feature-text" data-cms="feature_4_desc">Kami siap datang mengecek pencahayaan dan mengukur lahan secara presisi sebelum Anda memutuskan pemesanan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="why-us-visual">
+          <div class="visual-card">
+            <img src="assets/hero_lawn.jpg" alt="Hasil Pengerjaan Rumput Mewah" class="visual-img">
+            <div class="visual-floating-badge">
+              <div class="badge-icon">🌿</div>
+              <div class="badge-content">
+                <strong data-cms="visual_badge_title">100% Puas & Segar</strong>
+                <span data-cms="visual_badge_subtitle">Standar Mutu Landscape Arsitektural</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Care Guide Section -->
+  <section class="care-guide-section" id="panduan">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag">PANDUAN HORTIKULTURA</span>
+        <h2 class="section-title">Tips Merawat Rumput Baru Tanam</h2>
+        <p class="section-desc">Ikuti 4 panduan esensial ini agar rumput baru Anda cepat menyatu dengan tanah dan berwarna hijau segar bercahaya.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <h3 class="step-title" data-cms="step_1_title">Penyiraman Intensif Minggu 1 - 2</h3>
+          <p class="step-desc" data-cms="step_1_desc">Siram 2 kali sehari (pagi sebelum jam 09.00 & sore setelah jam 16.00). Pastikan air menembus lempengan hingga melembapkan tanah perakaran.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <h3 class="step-title" data-cms="step_2_title">Hindari Injak Berlebih</h3>
+          <p class="step-desc" data-cms="step_2_desc">Beri waktu 10 hingga 14 hari bagi perakaran untuk menancap kuat sebelum diinjak bebas atau digunakan untuk aktivitas berat.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <h3 class="step-title" data-cms="step_3_title">Pemupukan Hari ke-20</h3>
+          <p class="step-desc" data-cms="step_3_desc">Taburkan pupuk NPK Mutiara tipis-tipis secara merata, kemudian segera siram dengan air melimpah agar daun tidak gosong.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <h3 class="step-title" data-cms="step_4_title">Pemangkasan Berkala</h3>
+          <p class="step-desc" data-cms="step_4_desc">Pangkas ujung helai jika sudah melebihi 5 cm. Pemotongan merangsang tunas samping berkembang sehingga rumput semakin rapat dan padat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="faq-section" id="faq">
+    <div class="section-container">
+      <div class="section-header text-center">
+        <span class="section-tag">PUSAT BANTUAN</span>
+        <h2 class="section-title">Pertanyaan yang Sering Diajukan (FAQ)</h2>
+        <p class="section-desc">Jawaban transparan seputar pengiriman, minimal order, dan tata cara pemasangan rumput.</p>
+      </div>
+
+      <div class="faq-accordion" id="faqAccordion">
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span data-cms="faq_q1">Berapa minimal pemesanan rumput?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p data-cms="faq_a1">Kami tidak membatasi minimal order yang kaku. Kami melayani mulai dari 5 m² untuk taman mungil rumah hingga puluhan ribu meter persegi untuk proyek fasilitas umum dan perkantoran.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-cms="faq_q2">Apakah rumput dikirim dalam bentuk lempengan siap pasang?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p data-cms="faq_a2">Ya! Rumput kami dikirim dalam bentuk lempengan matang dengan ketebalan tanah akar yang ideal (biasanya per lempeng 1x1 meter atau 50x50 cm). Siap digelar langsung di halaman Anda.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-cms="faq_q3">Apa perbedaan utama Rumput Gajah Mini dan Rumput Jepang?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p data-cms="faq_a3">Rumput Gajah Mini memiliki daun lebar mendatar, perawatannya sangat santai, dan tahan di area teduh parsial. Rumput Jepang memiliki helai runcing seperti jarum halus rapat bagai karpet mewah, namun wajib mendapat sinar matahari penuh minimal 6 jam sehari.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span data-cms="faq_q4">Bagaimana proses klaim garansi jika rumput mati?</span>
+            <span class="faq-arrow">▼</span>
+          </button>
+          <div class="faq-answer">
+            <p data-cms="faq_a4">Untuk pesanan yang menggunakan Jasa Tanam Resmi kami, cukup kirimkan foto/video kondisi rumput via WhatsApp. Tim kami akan segera menjadwalkan penyulaman bibit baru tanpa biaya tambahan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner Section -->
+  <section class="cta-banner-section">
+    <div class="section-container">
+      <div class="cta-box">
+        <div class="cta-box-content">
+          <span class="cta-tag" data-cms="cta_tag">KONSULTASI GRATIS HARI INI</span>
+          <h2 class="cta-title" data-cms="cta_title">Siap Mempercantik Halaman Rumah Anda Menjadi Lebih Sejuk & Asri?</h2>
+          <p class="cta-desc" data-cms="cta_desc">Hubungi tim konsultan kami sekarang untuk mendapatkan rekomendasi varietas yang tepat, penawaran harga terbaik, dan jadwal survey lokasi gratis.</p>
+          <div class="cta-btns">
+            <a href="https://wa.me/6281234567890?text=Halo%20GriyaRumput,%20saya%20mau%20pesan%20rumput%20taman" target="_blank" rel="noopener" class="btn btn-whatsapp-lg wa-dynamic-link">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+              </svg>
+              <span>Hubungi via WhatsApp (Fast Response)</span>
+            </a>
+            <a href="tel:081234567890" class="btn btn-phone-outline phone-dynamic-link">
+              <span id="phoneDisplay">📞 Telepon: 0812-3456-7890</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-badge">
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title" data-cms="footer_brand_name">Griya<span class="text-accent">Rumput</span></span>
+            <span class="brand-tagline">Taman Asri & Alami</span>
+          </div>
+        </div>
+        <p class="footer-about" data-cms="footer_about">Pusat budidaya, supplier lempengan rumput taman hidup segar berkualitas, dan kontraktor landscape taman terpercaya di Indonesia.</p>
+        <div class="social-links">
+          <span class="social-tag">Media Sosial:</span>
+          <a href="#" class="social-icon" aria-label="Instagram">📸 Instagram</a>
+          <a href="#" class="social-icon" aria-label="TikTok">🎵 TikTok</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Jenis Rumput</h4>
+        <ul class="footer-links">
+          <li><a href="#katalog">Rumput Gajah Mini</a></li>
+          <li><a href="#katalog">Rumput Jepang / Peking</a></li>
+          <li><a href="#katalog">Rumput Golf Bermuda</a></li>
+          <li><a href="#katalog">Rumput Swiss Super</a></li>
+          <li><a href="#katalog">Rumput Manila Hijau</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Layanan Kami</h4>
+        <ul class="footer-links">
+          <li><a href="#layanan">Pemasangan Rumput Taman</a></li>
+          <li><a href="#layanan">Pengolahan Tanah & Pupuk</a></li>
+          <li><a href="#layanan">Pembuatan Taman Minimalis</a></li>
+          <li><a href="#layanan">Perawatan & Pemangkasan</a></li>
+          <li><a href="#kalkulator">Hitung Kebutuhan Lahan</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4 class="footer-heading">Kontak & Workshop</h4>
+        <div class="contact-info">
+          <p id="footerAddress" data-cms="footer_address">📍 Kebun Pembibitan: Jl. Raya Pertamanan Hijau No. 88</p>
+          <p id="footerPhone">📞 Telepon: +62 812-3456-7890</p>
+          <p id="footerWa">💬 WhatsApp: 0812-3456-7890</p>
+          <p data-cms="footer_hours">⏰ Operasional: Setiap Hari (07.00 - 18.00 WIB)</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-bottom-inner">
+        <p>&copy; 2026 GriyaRumput.id — Hak Cipta Dilindungi. Dibuat dengan cinta untuk hunian hijau asri.</p>
+        <button id="btnFooterAdmin" class="link-admin-login">Login Admin</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Button -->
+  <a href="https://wa.me/6281234567890?text=Halo%20GriyaRumput,%20saya%20mau%20konsultasi%20pemesanan%20rumput%20taman" target="_blank" rel="noopener" class="floating-wa-btn wa-dynamic-link" id="floatingWaBtn" aria-label="Chat WhatsApp">
+    <div class="wa-tooltip">Konsultasi Rumput Gratis</div>
+    <div class="wa-icon-circle">
+      <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor">
+        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.007c.106.005.249-.04.39.299.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.087-.178.182-.077.355.101.173.449.741.963 1.201.662.591 1.221.774 1.394.86.173.086.275.072.376-.043.101-.116.433-.506.549-.679.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.043.072.043.419-.101.824z"/>
+      </svg>
+    </div>
+  </a>
+
+  <!-- ========================================================
+       MODAL 1: Admin Login Modal
+       ======================================================== -->
+  <div id="modalAdminLogin" class="modal-overlay hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-badge-icon">🔐</div>
+        <h3 class="modal-title">Masuk Portal Admin</h3>
+        <p class="modal-subtitle">Gunakan PIN default: <strong>admin123</strong> untuk mengaktifkan editor halaman.</p>
+        <button class="modal-close-btn" id="btnCloseLoginModal">&times;</button>
+      </div>
+      <form id="formAdminLogin" class="modal-body">
+        <div class="form-group">
+          <label class="form-label" for="inputAdminPin">Password / PIN Admin</label>
+          <input type="password" id="inputAdminPin" class="form-control" placeholder="Ketik admin123" required autocomplete="current-password">
+          <span class="form-hint">Tip: Anda dapat mengubah teks, harga produk, dan nomor WhatsApp kapan saja.</span>
+        </div>
+        <div id="loginErrorMessage" class="error-banner hidden">
+          ⚠️ Password/PIN salah. Gunakan: <strong>admin123</strong>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancelLogin">Batal</button>
+          <button type="submit" class="btn btn-primary">Buka Mode Edit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODAL 2: Price & Contact Settings Manager
+       ======================================================== -->
+  <div id="modalPriceSettings" class="modal-overlay hidden">
+    <div class="modal-card modal-lg">
+      <div class="modal-header">
+        <div class="modal-badge-icon">💰</div>
+        <h3 class="modal-title">Kelola Harga Rumput & Kontak Bisnis</h3>
+        <p class="modal-subtitle">Ubah harga satuan per meter persegi dan nomor kontak. Nilai di kalkulator dan katalog akan otomatis tersinkronisasi.</p>
+        <button class="modal-close-btn" id="btnClosePriceModal">&times;</button>
+      </div>
+      <form id="formPriceSettings" class="modal-body">
+        <div class="settings-grid-columns">
+          <!-- Column 1: Harga Rumput -->
+          <div class="settings-col">
+            <h4 class="settings-group-title">🌱 Harga Bibit Rumput (per m²)</h4>
+            
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_price_gajah_mini">Rumput Gajah Mini (Rp)</label>
+              <input type="number" id="cfg_price_gajah_mini" class="form-control" min="1000" step="500" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_price_jepang">Rumput Jepang / Peking (Rp)</label>
+              <input type="number" id="cfg_price_jepang" class="form-control" min="1000" step="500" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_price_golf">Rumput Golf / Bermuda (Rp)</label>
+              <input type="number" id="cfg_price_golf" class="form-control" min="1000" step="500" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_price_swiss">Rumput Swiss Super (Rp)</label>
+              <input type="number" id="cfg_price_swiss" class="form-control" min="1000" step="500" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_price_manila">Rumput Manila (Rp)</label>
+              <input type="number" id="cfg_price_manila" class="form-control" min="1000" step="500" required>
+            </div>
+          </div>
+
+          <!-- Column 2: Biaya Jasa & Kontak -->
+          <div class="settings-col">
+            <h4 class="settings-group-title">🚜 Ongkos Jasa & Bahan (per m²)</h4>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_price_install">Jasa Pasang & Tanam (Rp/m²)</label>
+              <input type="number" id="cfg_price_install" class="form-control" min="1000" step="500" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_price_fert">Media Tanah & Pupuk Awal (Rp/m²)</label>
+              <input type="number" id="cfg_price_fert" class="form-control" min="1000" step="500" required>
+            </div>
+
+            <h4 class="settings-group-title mt-4">📞 Pengaturan Kontak & WhatsApp</h4>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_wa_number">Nomor WhatsApp (Contoh: 6281234567890)</label>
+              <input type="text" id="cfg_wa_number" class="form-control" placeholder="6281234567890" required>
+              <span class="form-hint">Gunakan kode negara (62) tanpa spasi atau strip.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-sublabel" for="cfg_phone_display">Nomor Telepon Display</label>
+              <input type="text" id="cfg_phone_display" class="form-control" placeholder="0812-3456-7890" required>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="btnCancelPriceModal">Batal</button>
+          <button type="submit" class="btn btn-primary">Simpan & Terapkan Perubahan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="adminToast" class="admin-toast hidden">
+    <span class="toast-icon">✅</span>
+    <span class="toast-message" id="toastMessage">Perubahan berhasil disimpan!</span>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
